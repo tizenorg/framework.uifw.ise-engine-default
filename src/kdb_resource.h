@@ -1,0 +1,100 @@
+/*
+ *  ise-engine-default
+ *
+ * Copyright (c) 2012-2013 Samsung Electronics Co., Ltd. All rights reserved.
+ *
+ * Contact: Li zhang <li2012.zhang@samsung.com>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+#ifndef __KDB_RESOURCE_H__
+#define __KDB_RESOURCE_H__
+
+#define MAXCHARS_3x4	24
+#define MAXKEYS_3x4		10
+#define MAXKEYS_QWERTY 0xFF
+
+typedef enum {
+	I_HQR,			/* Regional Qwerty */
+	I_HQD,			/* Discrete Qwerty */
+	I_EXP
+} IMKeypad;
+
+typedef enum {
+	IM_LANGUAGE_ENGLISH = 0,
+	IM_LANGUAGE_FRENCH,
+	IM_LANGUAGE_SPANISH,
+	IM_LANGUAGE_DUTCH,
+	IM_LANGUAGE_GERMAN,
+	IM_LANGUAGE_GREEK,
+	IM_LANGUAGE_ITALIAN,
+	IM_LANGUAGE_PORTUGUESE,
+	IM_LANGUAGE_TURKISH,
+	IM_LANGUAGE_ARABIC,
+	IM_LANGUAGE_RUSSIAN,
+	IM_LANGUAGE_AFRIKAANS,
+	IM_LANGUAGE_ASSAMESE,
+	IM_LANGUAGE_AZERBAIJANI,
+	IM_LANGUAGE_BASQUE,
+	IM_LANGUAGE_BENGALI,
+	IM_LANGUAGE_BULGARIAN,
+	IM_LANGUAGE_CATALAN,
+	IM_LANGUAGE_CZECH,
+	IM_LANGUAGE_DANISH,
+	IM_LANGUAGE_ESTONIAN,
+	IM_LANGUAGE_FINNISH,
+	IM_LANGUAGE_GALICIAN,
+	IM_LANGUAGE_GEORGIAN,
+	IM_LANGUAGE_GUJARATI,
+	IM_LANGUAGE_HAUSA,
+	IM_LANGUAGE_HEBREW,
+	IM_LANGUAGE_HINDI,
+	IM_LANGUAGE_HUNGARIAN,
+	IM_LANGUAGE_ICELANDIC,
+	IM_LANGUAGE_IRISH,
+	IM_LANGUAGE_KANNADA,
+	IM_LANGUAGE_KAZAKH,
+	IM_LANGUAGE_LATVIAN,
+	IM_LANGUAGE_LITHUANIAN,
+	IM_LANGUAGE_MACEDONIAN,
+	IM_LANGUAGE_MALAYALAM,
+	IM_LANGUAGE_MALAY,
+	IM_LANGUAGE_MARATHI,
+	IM_LANGUAGE_MONGOLIAN,
+	IM_LANGUAGE_NEPALI,
+	IM_LANGUAGE_NORWEGIAN,
+	IM_LANGUAGE_POLISH,
+	IM_LANGUAGE_PUNJABI,
+	IM_LANGUAGE_ROMANIAN,
+	IM_LANGUAGE_SERBIAN,
+	IM_LANGUAGE_SINHALA,
+	IM_LANGUAGE_SLOVAK,
+	IM_LANGUAGE_SLOVENIAN,
+	IM_LANGUAGE_SWEDISH,
+	IM_LANGUAGE_TAMIL,
+	IM_LANGUAGE_TELUGU,
+	IM_LANGUAGE_THAI,
+	IM_LANGUAGE_UKRAINIAN,
+	IM_LANGUAGE_URDU,
+	IM_LANGUAGE_UZBEK,
+	IM_LANGUAGE_VIETNAMESE,
+	IM_LANGUAGE_WELSH,
+	IM_LANGUAGE_XHOSA,
+	IM_LANGUAGE_YORUBA,
+	IM_LANGUAGE_ZULU,
+	IM_LANGUAGE_CNT
+} IMLangauge;
+
+#endif
