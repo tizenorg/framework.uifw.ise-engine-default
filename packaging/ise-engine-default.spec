@@ -1,10 +1,9 @@
-#sbs-git:slp/pkgs/i/ise-engine-default ise-engine-default 0.1.4911 f634a59ecb8104768dec809386789faac1a3c121
 Name:       ise-engine-default
 Summary:    Multilingual Keyboard ISE
-Version:    0.1.5023
-Release:    1
-Group:      TO_BE/FILLED_IN
-License:    TO_BE/FILLED_IN
+Version:    0.1.5024
+Release:    7
+Group:      Graphics & UI Framework/Input
+License:    Apache-2.0
 Source0:    %{name}-%{version}.tar.gz
 BuildRequires:  pkgconfig(isf)
 
@@ -16,8 +15,8 @@ it is based on Input Service Framework(ISF).
 %setup -q
 
 %build
-
 ./bootstrap
+%autogen
 %configure --prefix=%{_prefix} --disable-static
 
 make %{?jobs:-j%jobs}
@@ -25,9 +24,11 @@ make %{?jobs:-j%jobs}
 %install
 rm -rf %{buildroot}
 %make_install
-
+mkdir -p %{buildroot}%{_datadir}/license
+install -m0644 %{_builddir}/%{buildsubdir}/LICENSE.APLv2 %{buildroot}%{_datadir}/license/%{name}
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/scim-1.0/1.4.0/IMEngine/ise-engine-default.so
-/usr/share/scim/icons/isf-default.png
+%{_libdir}/scim-1.0/1.4.0/IMEngine/ise-engine-default.so
+%{_datadir}/scim/icons/isf-default.png
+%{_datadir}/license/%{name}

@@ -1,7 +1,7 @@
 /*
  *  ise-engine-default
  *
- * Copyright (c) 2000 - 2011 Samsung Electronics Co., Ltd. All rights reserved.
+ * Copyright (c) 2012-2013 Samsung Electronics Co., Ltd. All rights reserved.
  *
  * Contact: Li zhang <li2012.zhang@samsung.com>
  *
@@ -53,11 +53,8 @@
 #endif
 
 #define DEFAULT_UUID "d75857a5-4148-4745-89e2-1da7ddaf7999"
-#define DEFAULT_NAME "Multilingual/Keyboard"
-#define ISF_CONFIG_HARDWARE_KEYBOARD_DETECT "/isf/hw_keyboard_detect"
+#define DEFAULT_NAME "Multilingual Keyboard"
 
-#define TIME_COUNT                      1   /*muti tap interval (seconds) */
-#define FLUSH_KEY                       0x8001
 #define UTF8_SIZE                       6
 
 #ifndef ISF_DEFAULT_ICON_FILE
@@ -102,7 +99,6 @@ DefaultFactory::DefaultFactory(const ConfigPointer & config)
 : m_config(config) {
 	m_uuid = DEFAULT_UUID;
 	m_name = _(DEFAULT_NAME);
-	m_lang = "Other";
 
 	set_languages
 	("nl_NL,nl_BE,en_US,en_GB,en_AU,en_CA,en_NZ,en_IE,en_ZA,en_JM,"
@@ -163,7 +159,6 @@ String DefaultFactory::get_icon_file() const {
 
 void DefaultFactory::reload_config(const ConfigPointer & config) {
 	if (config.null()) return;
-	m_lang = config->read(String(SCIM_CONFIG_SYSTEM_INPUT_LANGUAGE), m_lang);
 	int hw_detected = config->read(String (ISF_CONFIG_HARDWARE_KEYBOARD_DETECT) , hw_detected);
 	if (hw_detected == 1)
 		m_keypad_layout = I_HQD;
@@ -174,7 +169,7 @@ DefaultFactory::create_instance(const String & encoding, int id) {
 	return new DefaultInstance(this, encoding, id);
 }
 
-/* Initialize member varialbes */
+/* Initialize member variables */
 unsigned int DefaultInstance::m_prevkeyval = 0;
 int DefaultInstance::m_counter = 0;
 
@@ -192,7 +187,7 @@ DefaultInstance::DefaultInstance(DefaultFactory * factory,
 
 	for (int i = 1; i < 10; ++i) {
 		label[0] = '0' + i;
-		labels.push_back(utf8_mbstowcs(label));
+		labels.push_back(utf8_mbstowcs(String(label)));
 	}
 
 	m_lookup_table.set_candidate_labels(labels);
@@ -244,6 +239,7 @@ void DefaultInstance::flush() {
 }
 
 void DefaultInstance::focus_in() {
+	hide_lookup_table();
 }
 
 void DefaultInstance::focus_out() {
@@ -259,9 +255,15 @@ bool DefaultInstance::_process_keyrelease(const KeyEvent & key) {
 
 bool DefaultInstance::_process_keypress(const KeyEvent & key_raw) {
 	KeyEvent key = key_raw;
-	unsigned int keyvalue;
+	unsigned int keyvalue = key.code;
 
-	keyvalue = key.code;
+	if (key.is_control_down() || key.is_alt_down())
+		return false;
+
+	if (key.code == SCIM_KEY_NullKey || key.code == SCIM_KEY_Cancel) {
+		m_prevkeyval = keyvalue;
+		return false;
+	}
 
 	if (m_lang >= IM_LANGUAGE_CNT) {
 		return false;

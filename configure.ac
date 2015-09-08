@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(ise-default, 0.1.1, li2012.zhang@samsung.com)
+AC_INIT(ise-default, 0.1.5024, li2012.zhang@samsung.com)
 AC_CONFIG_SRCDIR([src/isf_default_imengine.cpp])
 
 # Save this value here, since automake will set cflags and cxxflags later
@@ -8,7 +8,7 @@ cppflags_set=${CPPFLAGS+set}
 
 ISF_DEFAULT_MAJOR_VERSION=0
 ISF_DEFAULT_MINOR_VERSION=1
-ISF_DEFAULT_MICRO_VERSION=1
+ISF_DEFAULT_MICRO_VERSION=5024
 
 ISF_DEFAULT_VERSION=$ISF_DEFAULT_MAJOR_VERSION.$ISF_DEFAULT_MINOR_VERSION.$ISF_DEFAULT_MICRO_VERSION
 
@@ -49,13 +49,6 @@ AM_CONDITIONAL(ARM, test x$TARGET = xARM)
 ISF_VERSION=1.0.0
 
 PKG_CHECK_MODULES(ISF,[isf >= $ISF_VERSION])
-
-# Check if we should build setup module
-PKG_CHECK_MODULES(ISF_GTKUTILS,[isf-gtkutils >= $ISF_VERSION],
-		  		[ISF_HAS_GTKUTILS=yes],
-				[ISF_HAS_GTKUTILS=no])
-
-
 AC_SUBST(ISF_VERSION)
 
 # Checks for header files.
@@ -110,7 +103,6 @@ ISF_DEFAULT_DATADIR=${ISF_DATADIR}/ise-engine-default
 AC_SUBST(ISF_DEFAULT_DATADIR)
 
 AC_CONFIG_FILES([Makefile
-		 m4/Makefile
 		 src/Makefile
 		 data/Makefile])
 
