@@ -1,14 +1,14 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(ise-default, 0.1.5024, li2012.zhang@samsung.com)
+AC_INIT(ise-engine-default, 1.0.0, li2012.zhang@samsung.com)
 AC_CONFIG_SRCDIR([src/isf_default_imengine.cpp])
 
 # Save this value here, since automake will set cflags and cxxflags later
 cflags_set=${CFLAGS+set}
 cppflags_set=${CPPFLAGS+set}
 
-ISF_DEFAULT_MAJOR_VERSION=0
-ISF_DEFAULT_MINOR_VERSION=1
-ISF_DEFAULT_MICRO_VERSION=5024
+ISF_DEFAULT_MAJOR_VERSION=1
+ISF_DEFAULT_MINOR_VERSION=0
+ISF_DEFAULT_MICRO_VERSION=0
 
 ISF_DEFAULT_VERSION=$ISF_DEFAULT_MAJOR_VERSION.$ISF_DEFAULT_MINOR_VERSION.$ISF_DEFAULT_MICRO_VERSION
 
@@ -74,12 +74,17 @@ if test "$enable_debug" = "yes"; then
 fi
 
 ISF_ICONDIR=`$PKG_CONFIG --variable=icondir scim`
+ISF_PKGDIR=`$PKG_CONFIG --variable=pkgdir scim`
 ISF_MODULEDIR=`$PKG_CONFIG --variable=moduledir scim`
 ISF_DATADIR=`$PKG_CONFIG --variable=scimdatadir scim`
 ISF_LIBDIR=`$PKG_CONFIG --variable=libdir scim`
 
 if test "x$ISF_ICONDIR" = "x"; then
   ISF_ICONDIR=${datadir}/scim/icons
+fi
+
+if test "x$ISF_PKGDIR" = "x"; then
+  ISF_PKGDIR=${datadir}/packages
 fi
 
 if test "x$ISF_MODULEDIR" = "x"; then
@@ -95,6 +100,7 @@ if test "x$ISF_LIBDIR" = "x"; then
 fi
 
 AC_SUBST(ISF_ICONDIR)
+AC_SUBST(ISF_PKGDIR)
 AC_SUBST(ISF_MODULEDIR)
 AC_SUBST(ISF_DATADIR)
 AC_SUBST(ISF_LIBDIR)

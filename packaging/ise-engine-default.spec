@@ -1,7 +1,7 @@
 Name:       ise-engine-default
 Summary:    Multilingual Keyboard ISE
-Version:    0.1.5024
-Release:    7
+Version:    1.0.0
+Release:    1
 Group:      Graphics & UI Framework/Input
 License:    Apache-2.0
 Source0:    %{name}-%{version}.tar.gz
@@ -28,7 +28,9 @@ mkdir -p %{buildroot}%{_datadir}/license
 install -m0644 %{_builddir}/%{buildsubdir}/LICENSE.APLv2 %{buildroot}%{_datadir}/license/%{name}
 
 %files
+%manifest %{name}.manifest
 %defattr(-,root,root,-)
 %{_libdir}/scim-1.0/1.4.0/IMEngine/ise-engine-default.so
 %{_datadir}/scim/icons/isf-default.png
+%{_datadir}/packages/*
 %{_datadir}/license/%{name}
